@@ -20,6 +20,7 @@ module JobFinder
     config_for(:local_env).each do |key, value|
       ENV[key.to_s] = value
     end
+  
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -37,7 +38,10 @@ module JobFinder
     config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> { Rails.logger }) do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options], expose: ['auth-token']
+        resource '*',
+          :headers => :any,
+          :methods => [:get, :post, :put, :delete, :options],
+          :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client']
       end
     end
   end

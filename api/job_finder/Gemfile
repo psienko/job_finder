@@ -15,7 +15,9 @@ gem 'active_model_serializers', '~> 0.9.3'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'kaminari', '~> 0.16.3'
 gem 'ancestry', '~> 2.1.0'
-
+gem 'angular_rails_csrf', '~> 1.0.4'
+gem 'devise_token_auth', '~> 0.1.36'
+gem 'omniauth', '~> 1.2.2'
 
 
 # Use ActiveModel has_secure_password
@@ -29,6 +31,7 @@ gem 'ancestry', '~> 2.1.0'
 group :development do
   gem 'thin', '~> 1.6.3'
   gem 'rails-erd', '~> 1.4.0'
+  gem 'mailcatcher', '~> 0.2.4'
 end
 
 group :development, :test do
