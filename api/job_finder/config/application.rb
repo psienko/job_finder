@@ -17,8 +17,11 @@ Bundler.require(*Rails.groups)
 
 module JobFinder
   class Application < Rails::Application
-    config_for(:local_env).each do |key, value|
-      ENV[key.to_s] = value
+    begin
+      config_for(:local_env).each do |key, value|
+        ENV[key.to_s] = value
+      end
+    rescue RuntimeError
     end
   
     # Settings in config/environments/* take precedence over those specified here.
