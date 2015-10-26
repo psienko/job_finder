@@ -4,4 +4,6 @@ To deploy on heroku
 ``` git subtree push --prefix api/job_finder heroku master
 
 Migrate Databse on Heroku
+heroku pg:reset DATABASE
 ``` heroku run rake db:migrate
+    heroku run rake db:seed
