@@ -20,16 +20,16 @@ ActiveRecord::Schema.define(version: 20151026195317) do
     t.string   "title"
     t.text     "content"
     t.string   "profession"
-    t.boolean  "active"
+    t.boolean  "active",             default: true
     t.string   "contact_email"
     t.string   "contact_phone"
     t.string   "contact_person"
     t.string   "type_of_employment"
-    t.datetime "expires_at"
+    t.datetime "expires_at",         default: '2015-11-10 17:28:42'
     t.integer  "category_id"
     t.integer  "user_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   add_index "advertisements", ["category_id"], name: "index_advertisements_on_category_id", using: :btree
