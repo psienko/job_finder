@@ -6,4 +6,10 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   validates :email, uniqueness: true
+
+  has_many :advertisements
+
+  def fullname
+    "#{name.to_s.humanize} #{lastname.to_s.humanize}"
+  end
 end

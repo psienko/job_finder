@@ -11,10 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018103209) do
+ActiveRecord::Schema.define(version: 20151026195317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "advertisements", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.string   "profession"
+    t.boolean  "active",             default: true
+    t.string   "contact_email"
+    t.string   "contact_phone"
+    t.string   "contact_person"
+    t.string   "type_of_employment"
+    t.datetime "expires_at",         default: '2015-11-10 17:28:42'
+    t.integer  "category_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+  end
+
+  add_index "advertisements", ["category_id"], name: "index_advertisements_on_category_id", using: :btree
+  add_index "advertisements", ["user_id"], name: "index_advertisements_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",                       null: false
@@ -57,4 +76,6 @@ ActiveRecord::Schema.define(version: 20151018103209) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
+  add_foreign_key "advertisements", "categories"
+  add_foreign_key "advertisements", "users"
 end
