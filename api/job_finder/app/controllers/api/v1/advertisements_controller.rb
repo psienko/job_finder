@@ -58,7 +58,7 @@ class Api::V1::AdvertisementsController < Api::ApiController
   end
 
   def advert_params
-    params.require(:advert).permit(:title, :content, :profession, :active, :contact_email, :contact_phone,
+    params.require(:advertisement).permit(:title, :content, :profession, :active, :contact_email, :contact_phone,
                                    :contact_person, :type_of_employment, :expires_at)
   end
 
