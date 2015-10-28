@@ -15,23 +15,30 @@ class Api::V1::AdvertisementsController < Api::ApiController
   end
 
   def show
-    render json: @ad, status: :ok, serializer: Api::V1::AdvertisementsSerializer, root: 'advert'
+    render json: @ad, status: :ok, serializer: Api::V1::AdvertisementsSerializer, root: 'advertisement'
   end
 
   def update
     @ad.user = current_user
     @ad.category = @category
-    if @ad.update_attributes(advert_params)
-      render json: @ad, status: :ok, serializer: Api::V1::AdvertisementsSerializer, root: 'advert'
-    else
-      render json: @ad, status: :forbidden, serializer: Api::V1::AdvertisementsSerializer, root: 'advert'
-    end
+    status = @ad.update_attributes(advert_params) ? :ok : :forbidden
+    render json: @ad, status: status, serializer: Api::V1::AdvertisementsSerializer, root: 'advertisement'
   end
 
   def create
+    @ad = Advertisement.new(advert_params)
+    @ad.user = current_user
+    @ad.category = @category
+    status = @ad.save ? :ok : :forbidden
+    render json: @ad, status: status, serializer: Api::V1::AdvertisementsSerializer, root: 'advertisement'
   end
 
   def destroy
+    if @ad.destroy
+      render nothing: true, status: :ok
+    else
+      render json: @ad, status: :forbidden, serializer: Api::V1::AdvertisementsSerializer, root: 'advertisement'
+    end
   end
 
   private
@@ -47,7 +54,7 @@ class Api::V1::AdvertisementsController < Api::ApiController
   end
 
   def require_owner!
-    render nothing: true, status: :unauthorized unless current_user == @ad.user
+    render nothing: true, status: :unauthorized and return unless current_user == @ad.user
   end
 
   def advert_params
