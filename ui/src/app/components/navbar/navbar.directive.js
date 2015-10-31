@@ -1,18 +1,15 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('jobFinder')
-    .directive('acmeNavbar', acmeNavbar);
+    .directive('jobFinderNavbar', jobFinderNavbar);
 
   /** @ngInject */
-  function acmeNavbar() {
+  function jobFinderNavbar() {
     var directive = {
       restrict: 'E',
       templateUrl: 'app/components/navbar/navbar.html',
-      scope: {
-          creationDate: '='
-      },
       controller: NavbarController,
       controllerAs: 'vm',
       bindToController: true
@@ -21,11 +18,37 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController(moment) {
-      var vm = this;
+    function NavbarController(moment, $scope, appAuthService, $location, $log, httpBuffer, $rootScope, cfpLoadingBar, localStorageService) {
 
-      // "vm.creation" is avaible by directive option "bindToController: true"
-      vm.relativeDate = moment(vm.creationDate).fromNow();
+      $scope.logOut = function () {
+        appAuthService.logOut();
+        $location.path('/home');
+      };
+
+      $rootScope.$on('event:auth-loginRequired', function () {
+        var authData = localStorageService.get('authorizationData');
+
+        if (authData) {
+          appAuthService.refreshToken().then(function (response) {
+            $log.debug('Refresh Token:\n');
+            $log.debug(response);
+            cfpLoadingBar.complete();
+          }, function (reason) {
+            $log.debug('Reason:\n');
+            $log.debug(reason);
+            appAuthService.logOut();
+            cfpLoadingBar.complete();
+            $location.path('/login');
+          });
+        }
+        else {
+          appAuthService.logOut();
+          cfpLoadingBar.complete();
+          $location.path('/login');
+        }
+      });
+
+      $scope.authentication = appAuthService.authentication;
     }
   }
 

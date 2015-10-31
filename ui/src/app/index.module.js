@@ -4,16 +4,17 @@
   angular
     .module('jobFinder',
       [
-        'ngAnimate',
-        'ngCookies',
-        'ngTouch',
-        'ngSanitize',
-        'ngMessages',
-        'ngAria',
-        'ngResource',
-        'ui.router',
-        'ui.bootstrap',
-        'toastr'
+      'ngAnimate',
+      'ngCookies',
+      'ngTouch',
+      'ngSanitize',
+      'ngResource',
+      'ui.router',
+      'ngRoute',
+      'ui.bootstrap',
+      'LocalStorageModule',
+      'angular-loading-bar',
+      'http-auth-interceptor'
 
       ]);
 
