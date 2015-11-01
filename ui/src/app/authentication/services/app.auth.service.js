@@ -23,11 +23,11 @@
 
             var deferred = $q.defer();
 
-            $http.post(serviceBase, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, ignoreAuthModule: true, ignoreLoadingBar: true }).success(function (response) {
+            $http.post(serviceBase, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, ignoreAuthModule: true, ignoreLoadingBar: true }).success(function (response, status, headers ) {
 
                 //localStorageService.set('authorizationData', { token: response.access_token, email: loginData.email, refreshToken: response.refresh_token });
-                localStorageService.set('authorizationData', { token: response.access_token, email: loginData.email, refreshToken: response.refresh_token });
-
+                localStorageService.set('authorizationData', { token: headers('Access-Token'), email: loginData.email, client: headers('Client'), refreshToken: response.refresh_token });
+                $log.debug(headers('Access-Token'));
                 _authentication.isAuth = true;
                 _authentication.email = loginData.email;
                 authService.loginConfirmed();
@@ -74,9 +74,9 @@
 
                 localStorageService.remove('authorizationData');
 
-                $http.post(serviceBase + 'Token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, ignoreLoadingBar: true }).success(function (response) {
+                $http.post(serviceBase + 'Token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, ignoreLoadingBar: true }).success(function (response, status, headers ) {
 
-                    localStorageService.set('authorizationData', { token: response.access_token, email: authData.email, refreshToken: response.refresh_token });
+                    localStorageService.set('authorizationData', { token: headers('Access-Token'), email: loginData.email, client: headers('Client'), refreshToken: response.refresh_token });
                     authService.loginConfirmed();
                     deferred.resolve(response);
 
