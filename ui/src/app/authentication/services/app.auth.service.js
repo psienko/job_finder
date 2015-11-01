@@ -8,34 +8,34 @@
     /** @ngInject */
     function appAuthService($http, $q, localStorageService, ngAuthSettings, $log, authService) {
 
-        var serviceBase = ngAuthSettings.apiServiceBaseUri;
+        var serviceBase = ngAuthSettings.apiSignINUri;
         var appAuthServiceFactory = {};
 
         var _authentication = {
             isAuth: false,
-            userName: ""
+            email: ""
         };
 
         var _login = function (loginData) {
 
-            var data = "grant_type=password&username=" + loginData.userName +
-                "&password=" + loginData.password +
-                "&client_id=" + ngAuthSettings.clientId;
+            var data = "email=" + loginData.email +
+                "&password=" + loginData.password;
 
             var deferred = $q.defer();
 
-            $http.post(serviceBase + 'Token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, ignoreAuthModule: true, ignoreLoadingBar: true }).success(function (response) {
+            $http.post(serviceBase, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, ignoreAuthModule: true, ignoreLoadingBar: true }).success(function (response) {
 
-                localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: response.refresh_token });
+                //localStorageService.set('authorizationData', { token: response.access_token, email: loginData.email, refreshToken: response.refresh_token });
+                localStorageService.set('authorizationData', { token: response.access_token, email: loginData.email, refreshToken: response.refresh_token });
 
                 _authentication.isAuth = true;
-                _authentication.userName = loginData.userName;
+                _authentication.email = loginData.email;
                 authService.loginConfirmed();
 
                 deferred.resolve(response);
 
             }).error(function (err, status) {
-                $log.debug(err.error_description + '\nHttpStatus: ' + status);
+                $log.debug(err.errors + '\nHttpStatus: ' + status);
                 _logOut();
                 deferred.reject(err);
             });
@@ -49,7 +49,7 @@
             localStorageService.remove('authorizationData');
 
             _authentication.isAuth = false;
-            _authentication.userName = "";
+            _authentication.email = "";
 
             authService.loginCancelled();
         };
@@ -58,7 +58,7 @@
             var authData = localStorageService.get('authorizationData');
             if (authData) {
                 _authentication.isAuth = true;
-                _authentication.userName = authData.userName;
+                _authentication.email = authData.email;
                 authService.loginConfirmed();
             }
         };
@@ -76,7 +76,7 @@
 
                 $http.post(serviceBase + 'Token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, ignoreLoadingBar: true }).success(function (response) {
 
-                    localStorageService.set('authorizationData', { token: response.access_token, userName: authData.userName, refreshToken: response.refresh_token });
+                    localStorageService.set('authorizationData', { token: response.access_token, email: authData.email, refreshToken: response.refresh_token });
                     authService.loginConfirmed();
                     deferred.resolve(response);
 

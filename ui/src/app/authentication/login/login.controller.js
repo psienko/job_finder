@@ -9,7 +9,7 @@
     function loginController($scope, $location, appAuthService, ngAuthSettings, $log, toastr) {
 
         $scope.loginData = {
-            userName: "",
+            email: "",
             password: ""
         };
 
@@ -25,7 +25,7 @@
                 $location.path('/');
             },
                 function (err) {
-                    $scope.message = err.error_description;
+                    $scope.message = err.errors[0];
                     $scope.loginData.password = "";
                     $scope.loginForm.$setPristine();
                 });

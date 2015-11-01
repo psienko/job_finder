@@ -7,9 +7,9 @@
             <div class="col-md-6">
                 <h2 class="form-login-heading">Login</h2>
 
-                <div class="form-group" ng-class="{ 'has-error' : loginForm.userName.$invalid && !loginForm.userName.$pristine }">
-                    <input type="text" class="form-control" placeholder="Login" name="userName" data-ng-model="loginData.userName" required autofocus >
-                    <p ng-show="loginForm.userName.$invalid && !loginForm.userName.$pristine" class="help-block">Login jest wymagany</p>
+                <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
+                    <input type="text" class="form-control" placeholder="Email" name="email" data-ng-model="loginData.email" required autofocus >
+                    <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Email jest wymagany</p>
                 </div>
 
                 <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
@@ -18,7 +18,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <button class="btn btn-md btn-info btn-block" type="submit" ng-disabled="loginForm.userName.$invalid || loginForm.password.$invalid">
+                    <button class="btn btn-md btn-info btn-block" type="submit" ng-disabled="loginForm.email.$invalid || loginForm.password.$invalid">
                         Zaloguj
                     </button>
                 </div>
