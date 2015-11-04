@@ -8,7 +8,9 @@
     /** @ngInject */
     function appAuthService($http, $q, localStorageService, ngAuthSettings, $log, authService) {
 
-        var serviceBase = ngAuthSettings.apiSignINUri;
+        var signInUri = ngAuthSettings.apiSignINUri;
+        var signOutUri = ngAuthSettings.apiSignOUTUri;
+
         var appAuthServiceFactory = {};
 
         var _authentication = {
@@ -23,11 +25,18 @@
 
             var deferred = $q.defer();
 
-            $http.post(serviceBase, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, ignoreAuthModule: true, ignoreLoadingBar: true }).success(function (response, status, headers ) {
+            $http.post(signInUri, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, ignoreAuthModule: true, ignoreLoadingBar: true }).success(function (response, status, headers) {
 
-                //localStorageService.set('authorizationData', { token: response.access_token, email: loginData.email, refreshToken: response.refresh_token });
-                localStorageService.set('authorizationData', { token: headers('Access-Token'), email: loginData.email, client: headers('Client'), refreshToken: response.refresh_token });
-                $log.debug(headers('Access-Token'));
+                localStorageService.set('authorizationData',
+                    {
+                        accessToken: headers('Access-Token'),
+                        tokenType: headers('Token-Type'),
+                        client: headers('Client'),
+                        expiry: headers('Expiry'),
+                        uid: headers('Uid'),
+                        email: loginData.email
+                    });
+                    
                 _authentication.isAuth = true;
                 _authentication.email = loginData.email;
                 authService.loginConfirmed();
@@ -36,6 +45,7 @@
 
             }).error(function (err, status) {
                 $log.debug(err.errors + '\nHttpStatus: ' + status);
+                localStorageService.remove('authorizationData');
                 _logOut();
                 deferred.reject(err);
             });
@@ -46,12 +56,22 @@
 
         var _logOut = function () {
 
-            localStorageService.remove('authorizationData');
+            var deferred = $q.defer();
 
-            _authentication.isAuth = false;
-            _authentication.email = "";
+            $http.delete(signOutUri).success(function (response) {
+                localStorageService.remove('authorizationData');
+                _authentication.isAuth = false;
+                _authentication.email = "";
+                authService.loginCancelled();
 
-            authService.loginCancelled();
+            }).error(function (err, status) {
+                $log.debug(err.errors + '\nHttpStatus: ' + status);
+                localStorageService.remove('authorizationData');
+                _logOut();
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
         };
 
         var _fillAuthData = function () {
@@ -63,40 +83,10 @@
             }
         };
 
-        var _refreshToken = function () {
-            var deferred = $q.defer();
-
-            var authData = localStorageService.get('authorizationData');
-
-            if (authData) {
-
-                var data = "grant_type=refresh_token&refresh_token=" + authData.refreshToken + "&client_id=" + ngAuthSettings.clientId;
-
-                localStorageService.remove('authorizationData');
-
-                $http.post(serviceBase + 'Token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, ignoreLoadingBar: true }).success(function (response, status, headers ) {
-
-                    localStorageService.set('authorizationData', { token: headers('Access-Token'), email: loginData.email, client: headers('Client'), refreshToken: response.refresh_token });
-                    authService.loginConfirmed();
-                    deferred.resolve(response);
-
-                }).error(function (err, status) {
-                    $log.debug(err.error_description + '\nHttpStatus: ' + status);
-                    _logOut();
-                    deferred.reject(err);
-                });
-
-            }
-
-            return deferred.promise;
-        };
-
-
         appAuthServiceFactory.login = _login;
         appAuthServiceFactory.logOut = _logOut;
         appAuthServiceFactory.fillAuthData = _fillAuthData;
         appAuthServiceFactory.authentication = _authentication;
-        appAuthServiceFactory.refreshToken = _refreshToken;
 
         return appAuthServiceFactory;
     }

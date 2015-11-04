@@ -10,7 +10,8 @@
     .constant('toastr', toastr)
     .constant('ngAuthSettings', {
         apiServiceBaseUri: serviceBase,
-        apiSignINUri: serviceBase + 'sign_in'
+        apiSignINUri: serviceBase + 'sign_in',
+        apiSignOUTUri: serviceBase + 'sign_out'
     });
 
 })();
