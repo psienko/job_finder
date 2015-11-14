@@ -11,14 +11,19 @@
         var signInUri = ngAuthSettings.apiSignINUri;
         var signOutUri = ngAuthSettings.apiSignOUTUri;
 
-        var appAuthServiceFactory = {};
-
-        var _authentication = {
+        var authentication = {
             isAuth: false,
             email: ""
         };
+        
+        return {
+            login: login,
+            logOut: logOut,
+            fillAuthData: fillAuthData,
+            authentication: authentication
+        };
 
-        var _login = function (loginData) {
+        function login(loginData) {
 
             var data = "email=" + loginData.email +
                 "&password=" + loginData.password;
@@ -36,9 +41,9 @@
                         uid: headers('Uid'),
                         email: loginData.email
                     });
-                    
-                _authentication.isAuth = true;
-                _authentication.email = loginData.email;
+
+                authentication.isAuth = true;
+                authentication.email = loginData.email;
                 authService.loginConfirmed();
 
                 deferred.resolve(response);
@@ -46,48 +51,41 @@
             }).error(function (err, status) {
                 $log.debug(err.errors + '\nHttpStatus: ' + status);
                 localStorageService.remove('authorizationData');
-                _logOut();
+                logOut();
                 deferred.reject(err);
             });
 
             return deferred.promise;
+        }
 
-        };
-
-        var _logOut = function () {
+        function logOut() {
 
             var deferred = $q.defer();
 
             $http.delete(signOutUri).success(function (response) {
                 localStorageService.remove('authorizationData');
-                _authentication.isAuth = false;
-                _authentication.email = "";
+                $log.debug(response);
+                authentication.isAuth = false;
+                authentication.email = "";
                 authService.loginCancelled();
 
             }).error(function (err, status) {
                 $log.debug(err.errors + '\nHttpStatus: ' + status);
                 localStorageService.remove('authorizationData');
-                _logOut();
+                logOut();
                 deferred.reject(err);
             });
 
             return deferred.promise;
-        };
+        }
 
-        var _fillAuthData = function () {
+        function fillAuthData() {
             var authData = localStorageService.get('authorizationData');
             if (authData) {
-                _authentication.isAuth = true;
-                _authentication.email = authData.email;
+                authentication.isAuth = true;
+                authentication.email = authData.email;
                 authService.loginConfirmed();
             }
-        };
-
-        appAuthServiceFactory.login = _login;
-        appAuthServiceFactory.logOut = _logOut;
-        appAuthServiceFactory.fillAuthData = _fillAuthData;
-        appAuthServiceFactory.authentication = _authentication;
-
-        return appAuthServiceFactory;
+        }
     }
 })();

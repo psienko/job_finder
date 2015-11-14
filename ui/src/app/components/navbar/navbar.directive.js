@@ -25,29 +25,6 @@
         $location.path('/home');
       };
 
-      $rootScope.$on('event:auth-loginRequired', function () {
-        var authData = localStorageService.get('authorizationData');
-
-        if (authData) {
-          appAuthService.refreshToken().then(function (response) {
-            $log.debug('Refresh Token:\n');
-            $log.debug(response);
-            cfpLoadingBar.complete();
-          }, function (reason) {
-            $log.debug('Reason:\n');
-            $log.debug(reason);
-            appAuthService.logOut();
-            cfpLoadingBar.complete();
-            $location.path('/login');
-          });
-        }
-        else {
-          appAuthService.logOut();
-          cfpLoadingBar.complete();
-          $location.path('/login');
-        }
-      });
-
       $scope.authentication = appAuthService.authentication;
     }
   }

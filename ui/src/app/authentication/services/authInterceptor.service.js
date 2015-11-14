@@ -6,11 +6,16 @@
         .factory('authInterceptorService', authInterceptorService);
 
     /** @ngInject */
-    function authInterceptorService($q, $injector, $location, $rootScope, $log, localStorageService, httpBuffer) {
+    function authInterceptorService($q, $injector, $location, $rootScope, $log, localStorageService) {
 
-        var authInterceptorServiceFactory = {};
+        return {
+            request: request,
+            responseError: responseError,
+            response: response
+        };
 
-        var _request = function (config) {
+
+        function request(config) {
 
             config.headers = config.headers || {};
 
@@ -24,28 +29,28 @@
             }
 
             return config;
-        };
+        }
 
-        var _responseError = function (rejection) {
+        function responseError(rejection) {
 
             if (rejection.status === 401) {
-                httpBuffer.append(rejection.config, $q.defer());
+                $location.path('/login');
             }
 
             return $q.reject(rejection);
-        };
+        }
 
-        var _response = function (response) {
+        function response(response) {
             if (response.status === 200) {
                 var authData = localStorageService.get('authorizationData');
-                
+
                 var accessToken = response.headers('Access-Token');
                 var tokenType = response.headers('Token-Type');
                 var client = response.headers('Client');
                 var expiry = response.headers('Expiry');
                 var uid = response.headers('Uid');
 
-                if (authData && accessToken && tokenType && client && expiry && uid ) {
+                if (authData && accessToken && tokenType && client && expiry && uid) {
                     localStorageService.set('authorizationData',
                         {
                             accessToken: accessToken,
@@ -58,12 +63,6 @@
                 }
             }
             return response;
-        };
-
-        authInterceptorServiceFactory.request = _request;
-        authInterceptorServiceFactory.responseError = _responseError;
-        authInterceptorServiceFactory.response = _response;
-
-        return authInterceptorServiceFactory;
+        }
     }
 })();

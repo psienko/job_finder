@@ -7,27 +7,28 @@
 
     /** @ngInject */
     function loginController($scope, $location, appAuthService, ngAuthSettings, $log, toastr) {
-
-        $scope.loginData = {
+        var vm = this;
+        
+        vm.loginData = {
             email: "",
             password: ""
         };
 
-        $scope.message = "";
+        vm.message = "";
 
-        $scope.$on = function () {
+        vm.$on = function () {
             toastr.info("Wpisz Login i hasło żeby się zalogować.", " ");
         };
 
-        $scope.login = function () {
-            appAuthService.login($scope.loginData).then(function (response) {
-                $log.debug(response);
+        vm.login = function () {
+            appAuthService.login(vm.loginData).then(function (response) {
+                $log.debug(response.data);
                 $location.path('/');
             },
                 function (err) {
-                    $scope.message = err.errors[0];
-                    $scope.loginData.password = "";
-                    $scope.loginForm.$setPristine();
+                    vm.message = err.errors[0];
+                    vm.loginData.password = "";
+                    vm.loginForm.$setPristine();
                 });
         };
 
