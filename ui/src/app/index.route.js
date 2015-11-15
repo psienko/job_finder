@@ -19,7 +19,13 @@
         templateUrl: 'app/authentication/login/login.html',
         controller: 'loginController',
         controllerAs: 'loginCTRL'
-      });
+      })
+      .state('MyAds', {
+        url: '/myAds',
+        templateUrl: 'app/myAds/myAds.html',
+        controller: 'myAdsController',
+        controllerAs: 'myAdsCTRL'
+      })
 
 
     $urlRouterProvider.otherwise('/');

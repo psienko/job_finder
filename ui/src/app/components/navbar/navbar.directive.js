@@ -18,7 +18,7 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController(moment, $scope, appAuthService, $location, $log, httpBuffer, $rootScope, cfpLoadingBar, localStorageService) {
+    function NavbarController($scope, appAuthService, $location) {
 
       $scope.logOut = function () {
         appAuthService.logOut();
