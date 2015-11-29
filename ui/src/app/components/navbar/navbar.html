@@ -13,7 +13,7 @@
           <a ng-href="#/categories">Kategorie</a>
         </li>
         <li>
-          <a ng-href="#/myAds">Moje Ogłoszenia</a>
+          <a ng-hide="!authentication.isAuth" ng-href="#/myAds">Moje Ogłoszenia</a>
         </li>
       </ul>
 

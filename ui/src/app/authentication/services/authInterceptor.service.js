@@ -33,7 +33,8 @@
 
         function responseError(rejection) {
 
-            if (rejection.status === 401) {
+            if (rejection.status === 401 || rejection.status === 403) {
+                localStorageService.remove('authorizationData');
                 $location.path('/login');
             }
 

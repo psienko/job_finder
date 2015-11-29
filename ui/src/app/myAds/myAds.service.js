@@ -1,13 +1,20 @@
-(function () {
-    'use strict';
+(function() {
+  'use strict';
 
-    angular
-        .module('jobFinder')
-        .factory('myAdsService', myAdsService);
+  angular
+    .module('jobFinder')
+    .factory('myAdsService', myAdsService);
 
-    /** @ngInject */
-    function myAdsService($resource, apiAdvertisments) {
-        return $resource(apiAdvertisments.advertisments);
-    }
+  /** @ngInject */
+  function myAdsService($resource, apiAdvertisments) {
+    return {
+      advertisments: $resource(apiAdvertisments.advertisments, null, {
+        query: {
+          method: 'GET',
+          isArray: false
+        }
+      })
+    };
+  }
 
 })();

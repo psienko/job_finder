@@ -3,20 +3,20 @@
 
   angular
     .module('jobFinder')
-    .controller('myAdsController', myAdsController);
+    .controller('AdsController', AdsController);
 
   /** @ngInject */
-  function myAdsController($log, myAdsService) {
+  function AdsController($log, adsService) {
     var vm = this;
 
     vm.messageErr = '';
-    vm.myAds = myAdsService.advertisments.query({
+    vm.ads = adsService.advertisments.query({
       id: "1"
     });
 
-    vm.myAds.$promise.then(
+    vm.ads.$promise.then(
       function(result) {
-        vm.myAds = result.advertisements;
+        vm.ads = result.advertisements;
       },
       function(error) {
         $log.error(error);

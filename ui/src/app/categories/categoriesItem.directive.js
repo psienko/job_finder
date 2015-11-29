@@ -21,7 +21,7 @@
         return directive;
 
         /** @ngInject */
-        function categoryItemController($log, toastr) {
+        function categoryItemController() {
             var vm = this;
 
 
