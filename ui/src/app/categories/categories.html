@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <h2>
-      Ogłoszenia
+      Kategorie
     </h2>
     <div class="alert alert-danger" data-ng-hide="vm.messageErr === ''">
       Error:
@@ -10,9 +10,9 @@
 
   </div>
 
-  <ul class="list-group " ng-repeat="myAd in vm.myAds" style="list-style-type: none;">
+  <ul class="list-group " ng-repeat="category in vm.categories" style="list-style-type: none;">
     <li class="list-group-item event-listItem">
-      <my-ads-item my-ad="myAd"></my-ads-item>
+      <category-item category="category"></category-item>
     </li>
   </ul>
 

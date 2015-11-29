@@ -17,16 +17,21 @@
       .state('Login', {
         url: '/login',
         templateUrl: 'app/authentication/login/login.html',
-        controller: 'loginController',
+        controller: 'LoginController',
         controllerAs: 'loginCTRL'
       })
       .state('MyAds', {
         url: '/myAds',
         templateUrl: 'app/myAds/myAds.html',
         controller: 'myAdsController',
-        controllerAs: 'myAdsCTRL'
+        controllerAs: 'vm'
       })
-
+      .state('Categories', {
+        url: '/categories',
+        templateUrl: 'app/categories/categories.html',
+        controller: 'CategoriesController',
+        controllerAs: 'vm'
+      });
 
     $urlRouterProvider.otherwise('/');
   }

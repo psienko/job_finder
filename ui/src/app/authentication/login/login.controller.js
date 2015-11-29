@@ -3,12 +3,12 @@
 
     angular
         .module('jobFinder')
-        .controller('loginController', loginController);
+        .controller('LoginController', LoginController);
 
     /** @ngInject */
-    function loginController($scope, $location, appAuthService, ngAuthSettings, $log, toastr) {
+    function LoginController($scope, $location, appAuthService, ngAuthSettings, $log, toastr) {
         var vm = this;
-        
+
         vm.loginData = {
             email: "",
             password: ""

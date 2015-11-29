@@ -1,20 +1,33 @@
-﻿<nav class="navbar navbar-static-top navbar-inverse">
+<nav class="navbar navbar-static-top navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#/home">
-        <i class="glyphicon glyphicon-home"></i> Ogłoszenia
+        <i class="glyphicon glyphicon-home"></i>
+        Ogłoszenia
       </a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
       <ul class="nav navbar-nav">
-        <li><a ng-href="#/myAds">Moje Ogłoszenia</a></li>
+        <li>
+          <a ng-href="#/categories">Kategorie</a>
+        </li>
+        <li>
+          <a ng-href="#/myAds">Moje Ogłoszenia</a>
+        </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right vote-navbar-text">
-        <li data-ng-hide="!authentication.isAuth"><a href="#">Witaj {{authentication.email}}</a></li>
-        <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Wyloguj</a></li>
-        <li data-ng-hide="authentication.isAuth"> <a href="#/login">Zaloguj</a></li>
+        <li data-ng-hide="!authentication.isAuth">
+          <a href="#">Witaj
+            {{authentication.email}}</a>
+        </li>
+        <li data-ng-hide="!authentication.isAuth">
+          <a data-ng-click="logOut()" href="">Wyloguj</a>
+        </li>
+        <li data-ng-hide="authentication.isAuth">
+          <a href="#/login">Zaloguj</a>
+        </li>
       </ul>
     </div>
   </div>
