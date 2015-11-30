@@ -15,7 +15,7 @@
             isAuth: false,
             email: ""
         };
-        
+
         return {
             login: login,
             logOut: logOut,
@@ -39,7 +39,8 @@
                         client: headers('Client'),
                         expiry: headers('Expiry'),
                         uid: headers('Uid'),
-                        email: loginData.email
+                        email: loginData.email,
+                        created: new Date().getTime()
                     });
 
                 authentication.isAuth = true;
@@ -82,6 +83,12 @@
         function fillAuthData() {
             var authData = localStorageService.get('authorizationData');
             if (authData) {
+                var timeOut = new Date();
+                var tmp = parseInt(authData.expiry) + authData.created;
+                if (tmp < timeOut) {
+                    localStorageService.remove('authorizationData');
+                    return;
+                }
                 authentication.isAuth = true;
                 authentication.email = authData.email;
                 authService.loginConfirmed();
