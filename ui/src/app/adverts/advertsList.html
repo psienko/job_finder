@@ -1,0 +1,10 @@
+<div class="adverts-container">
+  <div class="alert alert-danger" data-ng-hide="vm.errorMessage === ''">
+    {{vm.errorMessage}}
+  </div>
+  <ul class="list-group" ng-repeat="advert in vm.adverts" style="list-style-type: none;">
+    <li class="list-group-item event-listItem">
+      <a ng-href="#/">{{advert.title}}</a>
+    </li>
+  </ul>
+</div>

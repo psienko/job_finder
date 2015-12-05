@@ -7,7 +7,7 @@
     .factory('authInterceptorService', authInterceptorService);
 
   /** @ngInject */
-  function authInterceptorService($q, $injector, $location, $rootScope, $log, localStorageService) {
+  function authInterceptorService($q, $injector, $location, $rootScope, $log, localStorageService, ngAuthSettings) {
 
     return {
       request: request,
@@ -39,6 +39,11 @@
         $location.path('/login');
       }
 
+      if (rejection.status === 404 && rejection.config.url === ngAuthSettings.apiSignOUTUri) {
+        localStorageService.remove('authorizationData');
+        $location.path('/login');
+        return $q.resolve(rejection);
+      }
       return $q.reject(rejection);
     }
 
@@ -60,7 +65,7 @@
             expiry: expiry,
             uid: uid,
             email: uid,
-            created: new Date().getTime(),
+            created: new Date().getTime()
           });
         }
       }

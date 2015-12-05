@@ -10,8 +10,8 @@
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'app/ads/ads.html',
-        controller: 'AdsController',
+        templateUrl: 'app/categories/categories.html',
+        controller: 'CategoriesController',
         controllerAs: 'vm'
       })
       .state('Login', {
@@ -22,14 +22,8 @@
       })
       .state('MyAds', {
         url: '/myAds',
-        templateUrl: 'app/myAds/myAds.html',
-        controller: 'myAdsController',
-        controllerAs: 'vm'
-      })
-      .state('Categories', {
-        url: '/categories',
-        templateUrl: 'app/categories/categories.html',
-        controller: 'CategoriesController',
+        templateUrl: 'app/ads/ads.html',
+        controller: 'AdsController',
         controllerAs: 'vm'
       });
 
