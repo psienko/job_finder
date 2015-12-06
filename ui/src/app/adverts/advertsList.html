@@ -2,9 +2,17 @@
   <div class="alert alert-danger" data-ng-hide="vm.errorMessage === ''">
     {{vm.errorMessage}}
   </div>
-  <ul class="list-group" ng-repeat="advert in vm.adverts" style="list-style-type: none;">
-    <li class="list-group-item event-listItem">
-      <a ng-href="#/">{{advert.title}}</a>
-    </li>
-  </ul>
+
+  <uib-accordion close-others="false">
+
+    <uib-accordion-group is-open="status.open" ng-repeat="advert in vm.adverts">
+      <uib-accordion-heading>
+        <span class="adverts-container-title">{{advert.title}} - {{advert.profession}}</span>
+        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+      </uib-accordion-heading>
+      <advert-item advert="advert"></advert-item>
+    </uib-accordion-group>
+
+  </uib-accordion>
+
 </div>

@@ -3,25 +3,25 @@
 
   angular
     .module('jobFinder')
-    .directive('adsItem', adsItem);
+    .directive('advertItem', advertItem);
 
   /** @ngInject */
-  function adsItem() {
+  function advertItem() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'app/ads/adsItem.html',
-      controller: adsItemController,
+      templateUrl: 'app/adverts/advertItem.html',
+      controller: advertItemController,
       controllerAs: 'vm',
       scope: {},
       bindToController: {
-        ad: '='
+        advert: '='
       }
     };
 
     return directive;
 
     /** @ngInject */
-    function adsItemController() {
+    function advertItemController() {
       var vm = this;
 
 
