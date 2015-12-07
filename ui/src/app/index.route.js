@@ -21,9 +21,9 @@
         controllerAs: 'loginCTRL'
       })
       .state('MyAds', {
-        url: '/myAds',
-        templateUrl: 'app/ads/ads.html',
-        controller: 'AdsController',
+        url: '/myAdverts',
+        templateUrl: 'app/myAdverts/myAdverts.html',
+        controller: 'MyAdvertsController',
         controllerAs: 'vm'
       });
 

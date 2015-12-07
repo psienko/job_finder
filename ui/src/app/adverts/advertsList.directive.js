@@ -21,12 +21,12 @@
     return directive;
 
     /** @ngInject */
-    function advertsListController(adsService, $log) {
+    function advertsListController(advertsService, $log) {
       var vm = this;
 
       vm.errorMessage = '';
 
-      vm.adverts = adsService.advertisments.query({
+      vm.adverts = advertsService.advertisments.query({
         id: vm.categoryId
       });
 

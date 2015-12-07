@@ -3,10 +3,10 @@
 
     angular
         .module('jobFinder')
-        .factory('adsService', adsService);
+        .factory('advertsService', advertsService);
 
     /** @ngInject */
-    function adsService($resource, apiAdvertisments) {
+    function advertsService($resource, apiAdvertisments) {
         return {
           advertisments: $resource(apiAdvertisments.advertisments, null, {
             query: {
