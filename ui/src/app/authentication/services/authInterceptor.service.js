@@ -65,7 +65,8 @@
             expiry: expiry,
             uid: uid,
             email: uid,
-            created: new Date().getTime()
+            created: new Date().getTime(),
+            userName: authData.userName //response.data.name + " " + response.data.lastname
           });
         }
       }

@@ -6,13 +6,14 @@
     .controller('MyAdvertsController', MyAdvertsController);
 
   /** @ngInject */
-  function MyAdvertsController($log, advertsService, categoriesService) {
+  function MyAdvertsController($log, advertsService, categoriesService, localStorageService) {
     var vm = this;
 
     vm.categories = categoriesService.categories.query();
 
     vm.messageErr = '';
     vm.myAdvertsList = [];
+    vm.authentication = localStorageService.get('authorizationData');
 
     vm.categories.$promise.then(
       function(result) {
@@ -24,7 +25,6 @@
           vm.myAdverts.$promise.then(
             function(result) {
               vm.myAdvertsList = vm.myAdvertsList.concat(result.advertisements);
-              $log.debug(vm.myAdvertsList);
             },
             function(error) {
               $log.error(error);
