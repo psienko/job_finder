@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function appAuthService($http, $q, localStorageService, ngAuthSettings, $log, authService) {
-
+    var singUpUri = ngAuthSettings.apiSignUPUri;
     var signInUri = ngAuthSettings.apiSignINUri;
     var signOutUri = ngAuthSettings.apiSignOUTUri;
 
@@ -20,6 +20,7 @@
     return {
       login: login,
       logOut: logOut,
+      singUp: singUp,
       fillAuthData: fillAuthData,
       authentication: authentication
     };
@@ -82,6 +83,34 @@
         $log.debug(err.errors + '\nHttpStatus: ' + status);
         localStorageService.remove('authorizationData');
         logOut();
+        deferred.reject(err);
+      });
+
+      return deferred.promise;
+    }
+
+    function singUp(singUpData) {
+      var data = "email=" + singUpData.email +
+        "&password=" + singUpData.password +
+        "&password_confirmation=" + singUpData.password_confirmation +
+        "&name=" + singUpData.name +
+        "&lastname=" + singUpData.lastname +
+        "&phoneNumber=" + singUpData.phoneNumber;
+
+      var deferred = $q.defer();
+
+      $http.post(singUpUri, data, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        ignoreAuthModule: true,
+        ignoreLoadingBar: true
+      }).success(function(response) {
+        $log.debug(response.data);
+        deferred.resolve(response);
+
+      }).error(function(err, status) {
+        $log.debug(err.errors + '\nHttpStatus: ' + status);
         deferred.reject(err);
       });
 

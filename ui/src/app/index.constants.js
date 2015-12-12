@@ -10,6 +10,7 @@
     .constant('toastr', toastr)
     .constant('ngAuthSettings', {
       apiServiceBaseUri: serviceBase,
+      apiSignUPUri: serviceBase + 'auth',
       apiSignINUri: serviceBase + 'auth/sign_in',
       apiSignOUTUri: serviceBase + 'auth/sign_out'
     })

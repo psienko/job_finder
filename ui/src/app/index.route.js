@@ -20,6 +20,12 @@
         controller: 'LoginController',
         controllerAs: 'loginCTRL'
       })
+      .state('SingUp', {
+        url: '/singUp',
+        templateUrl: 'app/authentication/singUp/singUp.html',
+        controller: 'SingUpController',
+        controllerAs: 'vm'
+      })
       .state('MyAds', {
         url: '/myAdverts',
         templateUrl: 'app/myAdverts/myAdverts.html',

@@ -1,0 +1,60 @@
+<div class="container">
+  <form class="my-form" name="vm.singUpForm" ng-submit="vm.singUp()" novalidate role="form">
+    <div class="row">
+      <div class="col-md-3">
+        &nbsp;
+      </div>
+      <div class="col-md-6">
+        <h2>Rejestracja</h2>
+
+        <div class="form-group" ng-class="{ 'has-error' : vm.singUpForm.email.$invalid && !vm.singUpForm.email.$pristine }">
+          <label>E-mail:</label>
+          <input autofocus="autofocus" class="form-control emailInput" data-ng-model="vm.singUpData.email" name="email" required type="text"/>
+          <p class="help-block" ng-show="vm.singUpForm.email.$invalid && !vm.singUpForm.email.$pristine">E-mail jest wymagany</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : vm.singUpForm.password.$invalid && !vm.singUpForm.password.$pristine }">
+          <label>Hasło:</label>
+          <input class="form-control loginInput" data-ng-model="vm.singUpData.password" name="password" required type="password"/>
+          <p class="help-block" ng-show="vm.singUpForm.password.$invalid && !vm.singUpForm.password.$pristine">Hasło jest wymagane</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : vm.singUpForm.password_confirmation.$invalid && !vm.singUpForm.password_confirmation.$pristine }">
+          <label>Potwierdź Hasło:</label>
+          <input class="form-control loginInput" data-ng-model="vm.singUpData.password_confirmation" name="password_confirmation" required type="password"/>
+          <p class="help-block" ng-show="vm.singUpForm.password_confirmation.$invalid && !vm.singUpForm.password_confirmation.$pristine">Hasło jest wymagane</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : vm.singUpForm.name.$invalid && !vm.singUpForm.name.$pristine }">
+          <label>Imię:</label>
+          <input class="form-control emailInput" data-ng-model="vm.singUpData.name" name="name" required type="text"/>
+          <p class="help-block" ng-show="vm.singUpForm.name.$invalid && !vm.singUpForm.name.$pristine">Imię jest wymagane</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : vm.singUpForm.lastname.$invalid && !vm.singUpForm.lastname.$pristine }">
+          <label>Nazwisko:</label>
+          <input class="form-control emailInput" data-ng-model="vm.singUpData.lastname" name="lastname" required type="text"/>
+          <p class="help-block" ng-show="vm.singUpForm.lastname.$invalid && !vm.singUpForm.lastname.$pristine">Nazwisko jest wymagane</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : vm.singUpForm.phoneNumber.$invalid && !vm.singUpForm.phoneNumber.$pristine }">
+          <label>Numer Telefonu:</label>
+          <input class="form-control emailInput" data-ng-model="vm.singUpData.phoneNumber" name="phoneNumber" type="text"/>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-md btn-info btn-block" ng-disabled="singUpForm.email.$invalid || singUpForm.password.$invalid || vm.singUpForm.password_confirmation.$invalid || vm.singUpForm.name.$invalid || vm.singUpForm.lastname.$invalid" type="submit">
+            Zatwierdź
+          </button>
+        </div>
+
+        <div class="alert alert-danger" data-ng-hide="vm.errorMessage == ''">
+          {{vm.errorMessage}}
+        </div>
+      </div>
+      <div class="col-md-3">
+        &nbsp;
+      </div>
+    </div>
+  </form>
+</div>
