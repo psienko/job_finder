@@ -1,19 +1,18 @@
 <div class="container">
-  <div class="row">
-    <h2>
-      Ogłoszenia
-    </h2>
-    <div class="alert alert-danger" data-ng-hide="vm.messageErr === ''">
-      Error:
-      {{vm.messageErr}}
-    </div>
-
+  <h2>
+    Ogłoszenia
+  </h2>
+  <div class="alert alert-danger" data-ng-hide="vm.messageErr === ''">
+    Error:
+    {{vm.messageErr}}
   </div>
 
   <ul class="list-group " ng-repeat="myAdvert in vm.myAdvertsList | filter: authentication.userName" style="list-style-type: none;">
-    <li class="list-group-item event-listItem">
-      <my-adverts-item my-advert="myAdvert"></my-adverts-item>
-    </li>
+    <div class="my-advert-item" ng-repeat="advert in myAdvert.adverts">
+      <li class="list-group-item event-listItem">
+        <my-adverts-item category="myAdvert.category" my-advert="advert"></my-adverts-item>
+      </li>
+    </div>
   </ul>
 
 </div>

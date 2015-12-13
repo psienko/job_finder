@@ -18,7 +18,7 @@
       categories: serviceBase + 'categories'
     })
     .constant('apiAdvertisments', {
-      advertisments: serviceBase + "categories/:id/advertisements"
+      advertisments: serviceBase + "categories/:id/advertisements/:advertId"
     });
 
 })();

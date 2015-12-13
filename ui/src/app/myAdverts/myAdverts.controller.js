@@ -24,7 +24,12 @@
           });
           vm.myAdverts.$promise.then(
             function(result) {
-              vm.myAdvertsList = vm.myAdvertsList.concat(result.advertisements);
+              if (result.advertisements.length > 0) {
+                vm.myAdvertsList = vm.myAdvertsList.concat({
+                  adverts: result.advertisements,
+                  category: category
+                });
+              }
             },
             function(error) {
               $log.error(error);

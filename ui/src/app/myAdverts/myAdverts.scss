@@ -1,0 +1,26 @@
+.my-advert-created-date {
+  @extend .advert-created-date;
+  margin-top: 0px;
+}
+
+.my-advert-content {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.my-advert-item {
+  @extend .advert-item;
+
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  .my-advert-category {
+    margin-bottom: 25px;
+  }
+}
+
+.my-advert-submit-buttons {
+  margin-top: 30px;
+  margin-left: 20px;
+}
