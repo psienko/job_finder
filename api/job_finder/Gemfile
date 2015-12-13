@@ -32,6 +32,7 @@ group :development do
   gem 'thin', '~> 1.6.3'
   gem 'rails-erd', '~> 1.4.0'
   gem 'mailcatcher', '~> 0.2.4'
+  gem 'railroady'
 end
 
 group :development, :test do
