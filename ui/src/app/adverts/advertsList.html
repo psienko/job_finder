@@ -1,0 +1,18 @@
+<div class="adverts-container">
+  <div class="alert alert-danger" data-ng-hide="vm.errorMessage === ''">
+    {{vm.errorMessage}}
+  </div>
+
+  <uib-accordion close-others="false">
+
+    <uib-accordion-group is-open="status.open" ng-repeat="advert in vm.adverts">
+      <uib-accordion-heading>
+        <span class="adverts-container-title">{{advert.title}} - {{advert.profession}}</span>
+        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+      </uib-accordion-heading>
+      <advert-item advert="advert"></advert-item>
+    </uib-accordion-group>
+
+  </uib-accordion>
+
+</div>

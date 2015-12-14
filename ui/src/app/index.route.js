@@ -10,23 +10,28 @@
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+        templateUrl: 'app/categories/categories.html',
+        controller: 'CategoriesController',
+        controllerAs: 'vm'
       })
       .state('Login', {
         url: '/login',
         templateUrl: 'app/authentication/login/login.html',
-        controller: 'loginController',
+        controller: 'LoginController',
         controllerAs: 'loginCTRL'
       })
-      .state('MyAds', {
-        url: '/myAds',
-        templateUrl: 'app/myAds/myAds.html',
-        controller: 'myAdsController',
-        controllerAs: 'myAdsCTRL'
+      .state('SingUp', {
+        url: '/singUp',
+        templateUrl: 'app/authentication/singUp/singUp.html',
+        controller: 'SingUpController',
+        controllerAs: 'vm'
       })
-
+      .state('MyAds', {
+        url: '/myAdverts',
+        templateUrl: 'app/myAdverts/myAdverts.html',
+        controller: 'MyAdvertsController',
+        controllerAs: 'vm'
+      });
 
     $urlRouterProvider.otherwise('/');
   }

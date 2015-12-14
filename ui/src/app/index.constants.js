@@ -1,17 +1,24 @@
 /* global toastr:false, moment:false */
-(function () {
+(function() {
   'use strict';
 
-  var serviceBase = 'http://jobfinder-prz.herokuapp.com/api/v1/auth/';
+  var serviceBase = 'http://jobfinder-prz.herokuapp.com/api/v1/';
 
   angular
     .module('jobFinder')
     .constant('moment', moment)
     .constant('toastr', toastr)
     .constant('ngAuthSettings', {
-        apiServiceBaseUri: serviceBase,
-        apiSignINUri: serviceBase + 'sign_in',
-        apiSignOUTUri: serviceBase + 'sign_out'
+      apiServiceBaseUri: serviceBase,
+      apiSignUPUri: serviceBase + 'auth',
+      apiSignINUri: serviceBase + 'auth/sign_in',
+      apiSignOUTUri: serviceBase + 'auth/sign_out'
+    })
+    .constant('apiCategories', {
+      categories: serviceBase + 'categories'
+    })
+    .constant('apiAdvertisments', {
+      advertisments: serviceBase + "categories/:id/advertisements/:advertId"
     });
 
 })();

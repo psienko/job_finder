@@ -1,0 +1,47 @@
+.adverts-list {
+  margin-right: 50px;
+}
+
+.adverts-container {
+
+  .adverts-container-title {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+}
+
+.adverts-contact-title {
+  margin: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.adverts-contact-details {
+  margin-left: 20px;
+
+  .adverts-contact-details-info {
+    font-weight: bold;
+  }
+}
+
+.advert-item {
+
+  pre {
+    background-color: transparent;
+    border-radius: 0;
+    text-align: justify;
+    margin-bottom: 15px;
+  }
+
+  .advert-content-title {
+    margin-bottom: 5px;
+  }
+
+  .advert-info {
+    font-weight: bold;
+  }
+}
+
+.advert-created-date {
+  float: right;
+}
