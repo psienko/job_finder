@@ -1,0 +1,36 @@
+<div class="my-advert-item">
+  <h1 class="my-advert-category">{{vm.category.name}}</h1>
+  <p class="advert-content-title">Treść Ogłoszenia:</p>
+  <textarea class="form-control my-advert-content" ng-model="vm.myAdvert.content" rows="5"></textarea>
+  <p class="">
+    Rodzaj zatrudnienia:
+    <input class="form-control emailInput" data-ng-model="vm.myAdvert.typeOfEmployment" name="typeOfEmployment" type="text"/>
+  </p>
+  <p class="adverts-contact-title">Dane Kontaktowe:</p>
+  <div class="adverts-contact-details">
+    <p>Osoba kontaktowa:
+      <input class="form-control emailInput" data-ng-model="vm.myAdvert.contactPerson" name="contactPerson" type="text"/>
+    </p>
+    <p>Adres email:
+      <input class="form-control emailInput" data-ng-model="vm.myAdvert.contactEmail" name="contactEmail" type="text"/>
+    </p>
+    <p>Numer Telefonu:
+      <input class="form-control emailInput" data-ng-model="vm.myAdvert.contactPhone" name="contactPhone" type="text"/>
+    </p>
+  </div>
+
+  <div class="my-advert-created-date">
+    Data Utworzenia:
+    {{vm.myAdvert.createdAt | date:'dd-MM-yyyy HH:mm'}}
+  </div>
+
+  <div class="my-advert-submit-buttons">
+    <button class="btn btn-success" ng-click="vm.editAvert(vm.myAdvert)">
+      Zatwierdź
+    </button>
+    <button class="btn btn-link" ng-click="vm.cancelEditAdvert()">
+      Anuluj
+    </button>
+  </div>
+
+</div>

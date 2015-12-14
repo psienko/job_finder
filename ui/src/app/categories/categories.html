@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="category-title">
+    <h2>
+      Kategorie
+    </h2>
+    <div class="alert alert-danger" data-ng-hide="vm.messageErr === ''">
+      Error:
+      {{vm.messageErr}}
+    </div>
+  </div>
+
+  <uib-accordion close-others="false">
+
+    <uib-accordion-group is-open="status.open" ng-repeat="category in vm.categories">
+      <uib-accordion-heading>
+        {{category.name}}
+        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+      </uib-accordion-heading>
+      Ogłoszenia z kategori {{category.name}}:
+      <adverts-list category-id="{{category.id}}"></adverts-list>
+    </uib-accordion-group>
+
+  </uib-accordion>
+
+</div>

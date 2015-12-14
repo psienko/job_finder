@@ -1,0 +1,24 @@
+<div class="advert-item">
+  <p class="advert-content-title">Treść Ogłoszenia:</p>
+  <pre>{{vm.advert.content}}</pre>
+  <p class="">
+    Rodzaj zatrudnienia: <span class="advert-info">{{vm.advert.typeOfEmployment}}</span>
+  </p>
+  <p class="adverts-contact-title">Dane Kontaktowe:</p>
+  <div class="adverts-contact-details">
+    <p>Osoba kontaktowa:
+      <span class="adverts-contact-details-info">{{vm.advert.contactPerson}}</span>
+    </p>
+    <p>Adres email:
+      <span class="adverts-contact-details-info">{{vm.advert.contactEmail}}</span>
+    </p>
+    <p>Numer Telefonu:
+      <span class="adverts-contact-details-info">{{vm.advert.contactPhone}}</span>
+    </p>
+  </div>
+
+  <div class="advert-created-date">
+    Data Utworzenia: {{vm.advert.createdAt | date:'dd-MM-yyyy HH:mm'}}
+  </div>
+
+</div>

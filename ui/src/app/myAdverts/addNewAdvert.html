@@ -1,0 +1,52 @@
+<button class="btn btn-primary add-new-advert-button" ng-click="vm.showAdvertForm(vm.inAdding = !vm.inAdding)">
+  Dodaj Ogłoszenie
+</button>
+<div class="add-new-advert-form" ng-show="vm.inAdding">
+  <label>Wybierz Kategorie:
+  </label>
+  <select class="form-control add-new-advert-select" name="categoriesSelect" ng-model="vm.selectedCategory">
+    <option ng-repeat="option in vm.categories" value="{{option.id}}">{{option.name}}</option>
+  </select>
+  <p class="">
+    Tytuł Ogłoszenia:
+    <input class="form-control emailInput" data-ng-model="vm.newAdvert.title" name="typeOfEmployment" type="text"/>
+  </p>
+  <p class="advert-content-title">Treść Ogłoszenia:</p>
+  <textarea class="form-control my-advert-content" ng-model="vm.newAdvert.content" rows="5"></textarea>
+  <p class="">
+    Rodzaj zatrudnienia:
+    <input class="form-control emailInput" data-ng-model="vm.newAdvert.typeOfEmployment" name="typeOfEmployment" type="text"/>
+  </p>
+  <p class="">
+    Zawód:
+    <input class="form-control emailInput" data-ng-model="vm.newAdvert.profession" name="profession" type="text"/>
+  </p>
+  <p class="">
+    Data Wygaśnięcia:
+    <input class="form-control emailInput" data-ng-model="vm.newAdvert.expiresAt" name="profession" type="date"/>
+  </p>
+
+
+  <p class="adverts-contact-title">Dane Kontaktowe:</p>
+  <div class="adverts-contact-details">
+    <p>Osoba kontaktowa:
+      <input class="form-control emailInput" data-ng-model="vm.newAdvert.contactPerson" name="contactPerson" type="text"/>
+    </p>
+    <p>Adres email:
+      <input class="form-control emailInput" data-ng-model="vm.newAdvert.contactEmail" name="contactEmail" type="text"/>
+    </p>
+    <p>Numer Telefonu:
+      <input class="form-control emailInput" data-ng-model="vm.newAdvert.contactPhone" name="contactPhone" type="text"/>
+    </p>
+  </div>
+
+
+  <div class="my-advert-submit-buttons">
+    <button class="btn btn-success" ng-click="vm.saveNewAdvert(vm.newAdvert)">
+      Zapisz
+    </button>
+    <button class="btn btn-link" ng-click="vm.showAdvertForm(false)">
+      Anuluj
+    </button>
+  </div>
+</div>

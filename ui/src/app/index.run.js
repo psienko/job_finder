@@ -6,8 +6,8 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log) {
-
+  function runBlock($log, appAuthService) {
+    appAuthService.fillAuthData();
     $log.debug('runBlock end');
   }
 

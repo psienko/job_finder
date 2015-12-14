@@ -1,20 +1,33 @@
 <nav class="navbar navbar-static-top navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="https://github.com/Swiip/generator-gulp-angular">
-        <span class="glyphicon glyphicon-home"></span> Gulp Angular
+      <a class="navbar-brand" href="#/home">
+        <i class="glyphicon glyphicon-home"></i>
+        Ogłoszenia
       </a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
       <ul class="nav navbar-nav">
-        <li class="active"><a ng-href="#">Home</a></li>
-        <li><a ng-href="#">About</a></li>
-        <li><a ng-href="#">Contact</a></li>
+        <li>
+          <a ng-hide="!authentication.isAuth" ng-href="#/myAdverts">Moje Ogłoszenia</a>
+        </li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right acme-navbar-text">
-        <li>Application was created {{ vm.relativeDate }}.</li>
+      <ul class="nav navbar-nav navbar-right vote-navbar-text">
+        <li data-ng-hide="!authentication.isAuth">
+          <a href="#">Witaj
+            {{authentication.userName}}</a>
+        </li>
+        <li data-ng-hide="!authentication.isAuth">
+          <a data-ng-click="logOut()" href="">Wyloguj</a>
+        </li>
+        <li data-ng-hide="authentication.isAuth">
+          <a href="#/login">Zaloguj</a>
+        </li>
+        <li data-ng-hide="authentication.isAuth">
+          <a href="#/singUp">Rejestracja</a>
+        </li>
       </ul>
     </div>
   </div>
