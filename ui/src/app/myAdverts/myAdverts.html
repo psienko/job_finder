@@ -7,6 +7,7 @@
     {{vm.messageErr}}
   </div>
 
+  <add-new-advert adverts="vm.myAdvertsList" categories="vm.categories"></add-new-advert>
   <ul class="list-group " ng-repeat="myAdvert in vm.myAdvertsList | filter: authentication.userName" style="list-style-type: none;">
     <div class="my-advert-item" ng-repeat="advert in myAdvert.adverts">
       <li class="list-group-item event-listItem">
