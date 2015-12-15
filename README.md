@@ -1,6 +1,9 @@
 # job_finder
 Projekt Aplikacje Internetowe
 
+##Host
+http://jobfinderprz.parseapp.com/#/
+
 ### Instalacja
 
 Zainstaluj Gulp i Bower globalnie:
